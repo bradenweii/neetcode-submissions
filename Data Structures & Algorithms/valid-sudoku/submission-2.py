@@ -1,0 +1,18 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        cols = collections.defaultdict(set)
+        rows = collections.defaultdict(set)
+        sqaures = collections.defaultdict(set)
+        for r in range(0,9):
+            for c in range(0,9):
+                if board[r][c]!=".":
+                    continue
+                if (board[r][c] in rows[r] or 
+                    board[r][c] in cols[c] or 
+                    board[r][c] in squares[(r//3,c//3)]):
+                    return False
+                rows[r].add(board[r][c])
+                rows[c].add(board[r][c])
+                square[(r//3,c//3)].add(board[r][c])
+        return True
+                

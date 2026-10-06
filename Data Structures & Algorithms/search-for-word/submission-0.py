@@ -1,0 +1,26 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        visited = []
+        row, col = len(board),len(board[0])
+        def dfs(r,c,i):
+            if(r<0 or c<0 or r>=row or c>=col 
+            or board[r][c] in visited
+            or word[i]!=board[r][c]):
+                return False
+            visited.append(board[r][c])
+            res = (dfs(r+1,c,i+1) or
+            dfs(r,c+1,i+1)or
+            dfs(r-1,c,i+1)or
+            dfs(r,c-1,i+1))
+            return res
+
+        for r in range(row):
+            for c in range(col):
+                if dfs(r,c,0):
+                    return True
+        return False
+
+
+
+
+        
